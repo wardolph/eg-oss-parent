@@ -66,16 +66,25 @@
     <checkstyle.config>${project.build.directory}/plugin-config/checkstyle/eg-checkstyle.xml</checkstyle.config>
     <mycila.config.header>${project.build.directory}/plugin-config/mycila/APACHE-2.txt</mycila.config.header>
     <mycila.config.header.def>${project.build.directory}/plugin-config/mycila/eg-definitions.xml</mycila.config.header.def>
+    
+    <!-- deployment properties -->
+    <nexus.staging.maven.plugin.repository.serverId>sonatype-nexus-staging</nexus.staging.maven.plugin.repository.serverId>
+    <nexus.staging.maven.plugin.repository.nexusUrl>https://oss.sonatype.org/</nexus.staging.maven.plugin.repository.nexusUrl>
+    <nexus.staging.maven.plugin.repository.id>sonatype-nexus-staging</nexus.staging.maven.plugin.repository.id>
+    <nexus.staging.maven.plugin.repository.url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</nexus.staging.maven.plugin.repository.url>
+    <nexus.staging.maven.plugin.snapshotRepository.id>sonatype-nexus-snapshots</nexus.staging.maven.plugin.snapshotRepository.id>
+    <nexus.staging.maven.plugin.snapshotRepository.url>https://oss.sonatype.org/content/repositories/snapshots</nexus.staging.maven.plugin.snapshotRepository.url>
+
   </properties>
 
   <distributionManagement>
     <snapshotRepository>
-      <id>sonatype-nexus-snapshots</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <id>${nexus.staging.maven.plugin.snapshotRepository.id}</id>
+      <url>${nexus.staging.maven.plugin.snapshotRepository.url}</url>
     </snapshotRepository>
     <repository>
-      <id>sonatype-nexus-staging</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+      <id>${nexus.staging.maven.plugin.repository.id}</id>
+      <url>${nexus.staging.maven.plugin.repository.url}</url>
     </repository>
   </distributionManagement>
 
@@ -202,8 +211,8 @@
         <version>${nexus.staging.maven.plugin.version}</version>
         <extensions>true</extensions>
         <configuration>
-          <serverId>sonatype-nexus-staging</serverId>
-          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <serverId>${nexus.staging.maven.plugin.repository.serverId}</serverId>
+          <nexusUrl>${nexus.staging.maven.plugin.repository.nexusUrl}</nexusUrl>
           <autoReleaseAfterClose>true</autoReleaseAfterClose>
         </configuration>
       </plugin>
